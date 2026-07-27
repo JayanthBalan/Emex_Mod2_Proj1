@@ -287,7 +287,9 @@ static int* findContact_internal(AddressBook *addressBook, const char *searchTer
             }
 
             fIdx[0] = up;
-            fIdx[1] = down;
+            if(down - up > 1) {
+                fIdx[1] = down;
+            }
             for(int j = up; j < down; j++) {
                 printf("Contact Details: %s, %s, %s\nEntry number: %d\n", addressBook->contacts[searchCriteria[j]].name,
                     addressBook->contacts[searchCriteria[j]].phone, 
