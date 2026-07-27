@@ -1,4 +1,7 @@
+
+#include "populate.h"
 #include "contact.h"
+
 // Dummy contact data
 static Contact dummyContacts[] = {
     {"John Doe", "1234567890", "john@example.com"},
@@ -15,8 +18,9 @@ static Contact dummyContacts[] = {
 
 void populateAddressBook(AddressBook* addressBook)
 {
-    int numDummyContacts = sizeof(dummyContacts) / sizeof(dummyContacts[0]);
-    for (int i = 0; i < numDummyContacts && addressBook->contactCount < MAX_CONTACTS; ++i) {
+    size_t numDummyContacts = sizeof(dummyContacts) / sizeof(dummyContacts[0]);
+    for (size_t i = 0; i < numDummyContacts && addressBook->contactCount < MAX_CONTACTS; ++i) {
         addressBook->contacts[addressBook->contactCount++] = dummyContacts[i];
+        sortContactPopulate(addressBook);
     }
 }
