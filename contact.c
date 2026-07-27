@@ -101,6 +101,7 @@ void createContact(AddressBook *addressBook)
 
     char name[50], phone[20], email[50];
 
+    getchar();
     printf("Enter name: ");
     fgets(name, sizeof(name), stdin);
     name[strcspn(name, "\n")] = 0;
@@ -168,6 +169,7 @@ void createContact(AddressBook *addressBook)
 void searchContact(AddressBook *addressBook) 
 {
     /* Define the logic for search */
+    getchar();
     char searchTerm[50];
     printf("Enter search term: ");
     fgets(searchTerm, sizeof(searchTerm), stdin);
@@ -383,6 +385,7 @@ static unsigned char check_Duplicate(AddressBook *addressBook, const char *field
 void editContact(AddressBook *addressBook)
 {
 	/* Define the logic for Editcontact */
+    getchar();
     char searchTerm[50];
     printf("Enter the contact to edit:\n");
     fgets(searchTerm, sizeof(searchTerm), stdin);
@@ -479,6 +482,7 @@ void deleteContact(AddressBook *addressBook)
 {
 	/* Define the logic for deletecontact */
     char searchTerm[50];
+    getchar();
     printf("Enter the contact to delete:\n");
     fgets(searchTerm, sizeof(searchTerm), stdin);
     searchTerm[strcspn(searchTerm, "\n")] = 0;
