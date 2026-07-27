@@ -99,20 +99,51 @@ void createContact(AddressBook *addressBook)
         return;
     }
 
-    char name[50], phone[20], email[50];
+    char name[50], phone[20], email[50], create_retry = 0;
 
+    createContactRetry:
     getchar();
     printf("Enter name: ");
     fgets(name, sizeof(name), stdin);
     name[strcspn(name, "\n")] = 0;
+    for(char *ptr = name; *ptr != '\0'; ptr++) {
+        if(!(*ptr >= 65 && *ptr <= 90 || *ptr >= 97 && *ptr <= 122 || *ptr == ' ' || *ptr == '.')) {
+            printf("Name Invalid. Retry...");
+            if(create_retry < 3) {
+                create_retry++;
+                goto createContactRetry;
+            }
+            return;
+        }
+    }
 
     printf("Enter phone: ");
     fgets(phone, sizeof(phone), stdin);
     phone[strcspn(phone, "\n")] = 0;
+    for(char *ptr = phone; *ptr != '\0'; ptr++) {
+        if(!(*ptr >= 48 && *ptr <= 57 || *ptr == ' ' || *ptr == '+' || *ptr == '-')) {
+            printf("Phone Invalid. Retry...");
+            if(create_retry < 3) {
+                create_retry++;
+                goto createContactRetry;
+            }
+            return;
+        }
+    }
     
     printf("Enter email: ");
     fgets(email, sizeof(email), stdin);
     email[strcspn(email, "\n")] = 0;
+    for(char *ptr = email; *ptr != '\0'; ptr++) {
+        if(!(*ptr >= 97 && *ptr <= 122 || *ptr == '.' || *ptr >= 48 && *ptr <= 57 || *ptr == 64 || *ptr == '_')) {
+            printf("Email Invalid. Retry...");
+            if(create_retry < 3) {
+                create_retry++;
+                goto createContactRetry;
+            }
+            return;
+        }
+    }
 
     unsigned char flag1 = 0, flag2 = 0, flag3 = 0;
     for(size_t i = 0; i < addressBook->contactCount; i++) {
