@@ -3,7 +3,7 @@
 
 #define MAX_CONTACTS 100
 
-unsigned char index_name[MAX_CONTACTS], index_phone[MAX_CONTACTS], index_email[MAX_CONTACTS];
+extern unsigned char index_name[MAX_CONTACTS], index_phone[MAX_CONTACTS], index_email[MAX_CONTACTS];
 
 typedef struct {
     char name[50];

@@ -6,6 +6,8 @@
 #include "populate.h"
 #include <ctype.h>
 
+unsigned char index_name[MAX_CONTACTS], index_phone[MAX_CONTACTS], index_email[MAX_CONTACTS];
+
 void sortContactPopulate(AddressBook *addressBook) {
     // Populate function to add a contact to address book
     Contact *cont = &addressBook->contacts[addressBook->contactCount - 1];
