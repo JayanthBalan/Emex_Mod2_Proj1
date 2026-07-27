@@ -269,10 +269,6 @@ static int* findContact_internal(AddressBook *addressBook, const char *searchTer
         else {
             if(*type != 2) {
                 fIdx[0] = i;
-                printf("Contact Details: %s, %s, %s\nEntry number: %d\n", addressBook->contacts[searchCriteria[i]].name,
-                    addressBook->contacts[searchCriteria[i]].phone, 
-                    addressBook->contacts[searchCriteria[i]].email, 
-                    searchCriteria[i] + 1);
                 return fIdx;
             }
 
@@ -290,13 +286,6 @@ static int* findContact_internal(AddressBook *addressBook, const char *searchTer
             if(down - up > 1) {
                 fIdx[1] = down;
             }
-            for(int j = up; j < down; j++) {
-                printf("Contact Details: %s, %s, %s\nEntry number: %d\n", addressBook->contacts[searchCriteria[j]].name,
-                    addressBook->contacts[searchCriteria[j]].phone, 
-                    addressBook->contacts[searchCriteria[j]].email, 
-                    searchCriteria[j] + 1);
-            }
-
             return fIdx;
         }
     }
