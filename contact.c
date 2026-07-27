@@ -14,21 +14,21 @@ void sortContactPopulate(AddressBook *addressBook) {
     unsigned char flag1 = 0, flag2 = 0, flag3 = 0;
     for(size_t i = 0; i < addressBook->contactCount - 1; i++) {
         if(flag1 == 0 && strcmp(addressBook->contacts[index_name[i]].name, cont->name) > 0) {
-            for(int k = addressBook->contactCount - 2; k >= i; k--) {
+            for(int k = (int)addressBook->contactCount - 2; k >= (int)i; k--) {
                 index_name[k + 1] = index_name[k];
             }
             index_name[i] = addressBook->contactCount - 1;
             flag1 = 1;
         }
         if(flag2 == 0 && strcmp(addressBook->contacts[index_phone[i]].phone, cont->phone) > 0) {
-            for(int k = addressBook->contactCount - 2; k >= i; k--) {
+            for(int k = (int)addressBook->contactCount - 2; k >= (int)i; k--) {
                 index_phone[k + 1] = index_phone[k];
             }
             index_phone[i] = addressBook->contactCount - 1;
             flag2 = 1;
         }
         if(flag3 == 0 && strcmp(addressBook->contacts[index_email[i]].email, cont->email) > 0) {
-            for(int k = addressBook->contactCount - 2; k >= i; k--) {
+            for(int k = (int)addressBook->contactCount - 2; k >= (int)i; k--) {
                 index_email[k + 1] = index_email[k];
             }
             index_email[i] = addressBook->contactCount - 1;
