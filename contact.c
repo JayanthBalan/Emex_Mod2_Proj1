@@ -257,7 +257,7 @@ static int* findContact_internal(AddressBook *addressBook, const char *searchTer
     int low = 0, high = count - 1, i;
     while(low <= high) {
         i = (low + high) / 2;
-        const char *compareField = (type == 0 ? addressBook->contacts[searchCriteria[i]].email : 
+        const char *compareField = (*type == 0 ? addressBook->contacts[searchCriteria[i]].email : 
             (*type == 1 ? addressBook->contacts[searchCriteria[i]].phone : addressBook->contacts[searchCriteria[i]].name));
         int cmp = strcmp(searchTerm, compareField);
         if(cmp > 0) {
