@@ -34,9 +34,6 @@ void sortContactPopulate(AddressBook *addressBook) {
             index_email[i] = addressBook->contactCount - 1;
             flag3 = 1;
         }
-        if(flag1 && flag2 && flag3) {
-            break; // All indices have been populated, exit the loop
-        }
     }
     if (!flag1) {
         index_name[addressBook->contactCount - 1] = addressBook->contactCount - 1;
@@ -176,9 +173,6 @@ void createContact(AddressBook *addressBook)
             }
             index_email[i] = addressBook->contactCount;
             flag3 = 1;
-        }
-        if(flag1 && flag2 && flag3) {
-            break; // All indices have been populated, exit the loop
         }
     }
     if (!flag1) {
@@ -353,7 +347,7 @@ static void sortContact_internal(AddressBook *addressBook, Contact *cont, unsign
     }
 
     unsigned char flag1 = 0, flag2 = 0, flag3 = 0;
-    for(size_t i = 0; i < count - 1 && !(flag1 && flag2 && flag3); i++) {
+    for(size_t i = 0; i < count - 1; i++) {
         if(flag1 == 0 && strcmp(addressBook->contacts[index_name[i]].name, cont->name) > 0) {
             for(int k = (int)count - 2; k >= (int)i; k--) {
                 index_name[k + 1] = index_name[k];
@@ -408,7 +402,7 @@ void editContact(AddressBook *addressBook)
 {
 	/* Define the logic for Editcontact */
     getchar();
-    char searchTerm[50];
+    char searchTerm[50], refineTerm[50];
     printf("Enter the contact to edit:\n");
     fgets(searchTerm, sizeof(searchTerm), stdin);
     searchTerm[strcspn(searchTerm, "\n")] = 0;
@@ -423,10 +417,10 @@ void editContact(AddressBook *addressBook)
     if(type == 2 && idx_contact[1] != -1) {
         SearchCriteriaRetry:
         printf("Multiple contacts found under %s. Please refine search with mobile number or email address: ", searchTerm);
-        fgets(searchTerm, sizeof(searchTerm), stdin);
-        searchTerm[strcspn(searchTerm, "\n")] = 0;
+        fgets(refineTerm, sizeof(refineTerm), stdin);
+        refineTerm[strcspn(refineTerm, "\n")] = 0;
         
-        if(strchr(searchTerm, '@') != NULL) {
+        if(strchr(refineTerm, '@') != NULL) {
             searchCriteria = index_email;
             type = 0;
         }
@@ -439,7 +433,7 @@ void editContact(AddressBook *addressBook)
             int contactIdx = index_name[i];
             const char *compareField = (type == 0 ? addressBook->contacts[contactIdx].email : 
                 addressBook->contacts[contactIdx].phone);
-            if(strcmp(compareField, searchTerm) == 0) {
+            if(strcmp(compareField, refineTerm) == 0) {
                 idx = contactIdx;
                 break;
             }
@@ -503,7 +497,7 @@ void editContact(AddressBook *addressBook)
 void deleteContact(AddressBook *addressBook)
 {
 	/* Define the logic for deletecontact */
-    char searchTerm[50];
+    char searchTerm[50], refineTerm[50];
     getchar();
     printf("Enter the contact to delete:\n");
     fgets(searchTerm, sizeof(searchTerm), stdin);
@@ -519,10 +513,10 @@ void deleteContact(AddressBook *addressBook)
     if(type == 2 && idx_contact[1] != -1) {
         SearchCriteriaRetry:
         printf("Multiple contacts found under %s. Please refine search with mobile number or email address: ", searchTerm);
-        fgets(searchTerm, sizeof(searchTerm), stdin);
-        searchTerm[strcspn(searchTerm, "\n")] = 0;
+        fgets(refineTerm, sizeof(refineTerm), stdin);
+        refineTerm[strcspn(refineTerm, "\n")] = 0;
 
-        if(strchr(searchTerm, '@') != NULL) {
+        if(strchr(refineTerm, '@') != NULL) {
             searchCriteria = index_email;
             type = 0;
         }
@@ -536,7 +530,7 @@ void deleteContact(AddressBook *addressBook)
             const char *compareField = (type == 0 ? addressBook->contacts[contactIdx].email :
                 addressBook->contacts[contactIdx].phone);
 
-            if(strcmp(compareField, searchTerm) == 0) {
+            if(strcmp(compareField, refineTerm) == 0) {
                 idx = contactIdx;
                 break;
             }
