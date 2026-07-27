@@ -4,6 +4,7 @@
 #include "contact.h"
 #include "file.h"
 #include "populate.h"
+#include <ctype.h>
 
 static unsigned char index_name[MAX_CONTACTS], index_phone[MAX_CONTACTS], index_email[MAX_CONTACTS];
 
@@ -298,7 +299,7 @@ static int* findContact_internal(AddressBook *addressBook, const char *searchTer
     return fIdx;
 }
 
-static void remove_rank(char *index_table, size_t idx, size_t cnt) {
+static void remove_rank(unsigned char *index_table, size_t idx, size_t cnt) {
     // Remove an element and slide left
     for(size_t i = idx; i < cnt - 1; i++) {
         index_table[i] = index_table[i + 1];
@@ -330,21 +331,21 @@ static void sortContact_internal(AddressBook *addressBook, Contact *cont, unsign
     unsigned char flag1 = 0, flag2 = 0, flag3 = 0;
     for(size_t i = 0; i < count - 1 && !(flag1 && flag2 && flag3); i++) {
         if(flag1 == 0 && strcmp(addressBook->contacts[index_name[i]].name, cont->name) > 0) {
-            for(int k = count - 2; k >= i; k--) {
+            for(int k = (int)count - 2; k >= (int)i; k--) {
                 index_name[k + 1] = index_name[k];
             }
             index_name[i] = origin_idx;
             flag1 = 1;
         }
         if(flag2 == 0 && strcmp(addressBook->contacts[index_phone[i]].phone, cont->phone) > 0) {
-            for(int k = count - 2; k >= i; k--) {
+            for(int k = (int)count - 2; k >= (int)i; k--) {
                 index_phone[k + 1] = index_phone[k];
             }
             index_phone[i] = origin_idx;
             flag2 = 1;
         }
         if(flag3 == 0 && strcmp(addressBook->contacts[index_email[i]].email, cont->email) > 0) {
-            for(int k = count - 2; k >= i; k--) {
+            for(int k = (int)count - 2; k >= (int)i; k--) {
                 index_email[k + 1] = index_email[k];
             }
             index_email[i] = origin_idx;

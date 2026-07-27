@@ -1,6 +1,5 @@
 
 #include "populate.h"
-#include "contact.h"
 
 // Dummy contact data
 static Contact dummyContacts[] = {
