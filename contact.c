@@ -101,8 +101,8 @@ void createContact(AddressBook *addressBook)
 
     char name[50], phone[20], email[50], create_retry = 0;
 
-    createContactRetry:
     getchar();
+    createContactRetry:
     printf("Enter name: ");
     fgets(name, sizeof(name), stdin);
     name[strcspn(name, "\n")] = 0;
