@@ -4,6 +4,6 @@
 #include "contact.h"
 
 void saveContactsToFile(AddressBook *addressBook);
-size_t loadContactsFromFile(AddressBook *addressBook);
+unsigned char loadContactsFromFile(AddressBook *addressBook);
 
 #endif
