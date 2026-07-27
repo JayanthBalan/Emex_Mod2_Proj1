@@ -5,7 +5,7 @@
 
 int main() {
     unsigned char choice;
-    AddressBook addressBook;
+    AddressBook addressBook = {0};
     initialize(&addressBook); // Initialize the address book
 
     do {
