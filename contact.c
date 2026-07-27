@@ -75,7 +75,7 @@ void listContacts(AddressBook *addressBook, unsigned char sortCriteria)
 }
 
 void initialize(AddressBook *addressBook) {
-    if(LoadContactsFromFile(addressBook) == 0) {
+    if(loadContactsFromFile(addressBook) == 0) {
         return; // Populate address book not required
     }
     populateAddressBook(addressBook);

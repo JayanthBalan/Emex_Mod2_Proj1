@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include "contact.h"
+#include "file.h"
 
 int main() {
     unsigned char choice;
@@ -17,7 +18,7 @@ int main() {
     	printf("6. Save contacts\n");
         printf("7. Force quit\n");
         printf("Enter your choice: ");
-        scanf("%1[^\n]", &choice);
+        scanf("%hhu", &choice);
         
         switch (choice) {
             case 1:
@@ -54,7 +55,7 @@ int main() {
             case 6:
                 printf("Saving and Exiting...\n");
                 saveContactsToFile(&addressBook);
-                break;
+                return 0;
             case 7:
                 printf("Force quitting without saving...\n");
                 return 0;
