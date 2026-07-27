@@ -108,7 +108,7 @@ void createContact(AddressBook *addressBook)
     name[strcspn(name, "\n")] = 0;
     for(char *ptr = name; *ptr != '\0'; ptr++) {
         if(!((*ptr >= 65 && *ptr <= 90) || (*ptr >= 97 && *ptr <= 122) || *ptr == ' ' || *ptr == '.')) {
-            printf("Name Invalid. Retry...");
+            printf("Name Invalid. Retry...\n");
             if(create_retry < 3) {
                 create_retry++;
                 goto createContactRetry;
